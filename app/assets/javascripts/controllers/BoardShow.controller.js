@@ -1,8 +1,6 @@
-Jello.controller('BoardShowCtrl', ['$scope', '$stateParams', '$state', 'boards',
-  function($scope, $stateParams, $state, boards) {
-    // $scope.board = boards
-    // if (!$stateParams.id) {
-    //   $stateParams.id = $scope.boards[0]
-    // }
-    // console.log($stateParams, boards)
+Jello.controller('BoardShowCtrl', ['$scope', '$stateParams', '$state', 'board',
+  function($scope, $stateParams, $state, board) {
+    $scope.currentBoard = board;
+    console.log('hello?')
+    console.log($scope.currentBoard)
   }])

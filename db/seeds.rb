@@ -5,7 +5,7 @@ Board.destroy_all
 
 puts "Creating users..."
 
-User.create(
+user = User.create(
   first_name: 'User',
   last_name:  'Userman',
   email:      'user@mail.com',
@@ -25,3 +25,16 @@ puts "Creating Boards"
 end
 
 puts "5 boards created"
+
+puts "adding lists to boards" 
+
+Board.all.each do |board|
+
+  4.times do 
+    board.lists.create(
+      user_id: user.id,
+      name: Faker::LordOfTheRings.location,
+      description: Faker::ChuckNorris.fact
+    )
+  end
+end

@@ -11,7 +11,15 @@ Jello.factory('boardService', ['Restangular',
         });
     }
 
+    var find = function(id) {
+      return Restangular.one('boards', id).get()
+        .then(function(board) {
+          return board;
+        })
+    }
+
     return {
-      all: all
+      all: all,
+      find: find
     }
   }])
