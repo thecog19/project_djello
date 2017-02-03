@@ -48,6 +48,15 @@ Jello.config(
 
 
     $stateProvider
+      .state('new',{
+        url: "boards/new",
+        views: {
+          '': {
+            templateUrl: "/templates/boards/new.html", 
+            controller: "BoardCreateCtrl"
+          }
+        }
+        })
       .state('boards', {
         url: '/boards/:id',
         resolve: {
