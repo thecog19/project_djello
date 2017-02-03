@@ -1,0 +1,17 @@
+<div class="container">
+<h3> {{currentBoard.title}} </h3> 
+
+<select>
+  <option ng-repeat="board in user">{{board.title}}</option>
+</select>
+<a>Delete Board</a> <a>Create Board</a>
+
+  <div class="row">
+    <div class="col-xs-8">
+      <ui-view="list-index"></ui-view>
+    </div>
+    <div class="col-xs-4">
+      <ui-view="activity-feed"></ui-view>
+    </div>
+  </div>
+</div>
