@@ -1,11 +1,11 @@
 puts "Destroying everything..."
 
-User.destroy_all
 Board.destroy_all
+User.destroy_all
 
 puts "Creating users..."
 
-User.create(
+user = User.create(
   first_name: 'User',
   last_name:  'Userman',
   email:      'user@mail.com',
@@ -25,3 +25,34 @@ puts "Creating Boards"
 end
 
 puts "5 boards created"
+
+puts "adding lists to boards" 
+
+Board.all.each do |board|
+
+  4.times do 
+    board.lists.create(
+      user_id: user.id,
+      title: Faker::Pokemon.location,
+      description: Faker::ChuckNorris.fact
+    )
+  end
+end
+
+puts "lists added"
+
+puts "adding cards to lists"
+
+List.all.each do |list| 
+
+  4.times do
+    list.cards.create(
+      user_id: user.id,
+      title: Faker::StarWars.vehicle,
+      description: Faker::Lorem.sentence,
+      priority: 1
+    )
+  end
+end
+
+puts "All done!"
