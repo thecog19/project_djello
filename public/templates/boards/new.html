@@ -1,9 +1,10 @@
 <div class="container">
-  <form name="createBoard" ng-sumbit="createBoard()">
-    <h3>Title: <input type="text" ng-value="title"></h3> 
+  <form name="createBoardForm" ng-submit="createBoard()">
+    <h3>Title: <input type="text" ng-model="title"></h3> 
 
     <div class="form-group">
-      <input type="sumbit" class="btn btn-success btn-big" value="save"> <button class="btn btn-danger btn-big" ng-click="">Cancel!</button>
+      <input type="submit" class="btn btn-success btn-big" value="save"> 
+      <button class="btn btn-danger btn-big" ui-sref="show({id: lastId})">Cancel!</button>
     </div>
   </form>
 </div>

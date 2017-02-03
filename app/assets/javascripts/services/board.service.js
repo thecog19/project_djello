@@ -18,8 +18,18 @@ Jello.factory('boardService', ['Restangular',
         })
     }
 
+    var create = function(title) {
+      console.log('creating', title)
+      return Restangular.all('boards').post({board: { title: title}})
+        .then(function(board) {
+          _boards.unshift(board);
+          return _boards
+        })
+    }
+
     return {
       all: all,
-      find: find
+      find: find,
+      create: create
     }
   }])

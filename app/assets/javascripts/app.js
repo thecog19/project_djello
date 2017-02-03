@@ -49,7 +49,7 @@ Jello.config(
 
     $stateProvider
       .state('new',{
-        url: "boards/new",
+        url: "boards/new?:lastId",
         views: {
           '': {
             templateUrl: "/templates/boards/new.html", 
