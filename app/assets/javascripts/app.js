@@ -50,7 +50,12 @@ Jello.config(
       .state('board', {
         url: '/board/:id',
         templateUrl: '/templates/board/show.html',
-        controller: 'BoardShowCtrl'
+        controller: 'BoardShowCtrl',
+        resolve: {
+          "boards": ["boardService", function(boardService){
+            return boardService.all() 
+          }]
+        },
         views: {
           'list-index' {
             templateUrl: '/templates/list/index.html'
