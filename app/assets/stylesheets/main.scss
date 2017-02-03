@@ -1,0 +1,12 @@
+#list-index {
+  overflow-x: scroll;
+  background: blue;
+}
+
+.list {
+  width: 500px;
+  flex-shrink: 0;
+  display: inline-block;
+  margin: 14px;
+  background: blue;
+}
