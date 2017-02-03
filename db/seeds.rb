@@ -12,7 +12,7 @@ User.create(
   password:   'password'
 )
 
-puts "User created, log in with user@email.com, and password: password"
+puts "User created, log in with user@mail.com, and password: password"
 puts "Creating Boards"
 
 5.times do |time|
