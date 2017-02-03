@@ -1,4 +1,3 @@
-
 var Jello = angular.module('Jello', ['ui.router', 'restangular', 'Devise'])
                    .constant('_', window._);
 
@@ -44,26 +43,29 @@ Jello.config(
   ['$stateProvider', '$urlRouterProvider',
   
   function($stateProvider, $urlRouterProvider){
-    $urlRouterProvider.otherwise('/board')
+    $urlRouterProvider.otherwise('/board/new')
 
 
     $stateProvider
       .state('new',{
-        url: "boards/new?:lastId",
+        url: "boards/new",
+        params: {lastId: ""},
         views: {
-          '': {
+          '@': {
             templateUrl: "/templates/boards/new.html", 
             controller: "BoardCreateCtrl"
           }
         }
         })
       .state('boards', {
-        url: '/boards/:id',
+        url: '/boards/show/:id',
         resolve: {
           "boards": ["boardService", function(boardService){
+            console.log("running")
             return boardService.all() 
           }],
           "board": ["boardService", "$stateParams", function(boardService, $stateParams) {
+            console.log("from the law")
             return boardService.find($stateParams.id)
           }]
         },

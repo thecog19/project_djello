@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_in_path_for(resource_or_scope)
-    path = "/#!/boards/#{current_user.shared_boards.last.id}"
+    path = "/#!/boards/show/#{current_user.shared_boards.last.id}"
     path
   end
 
