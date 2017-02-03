@@ -46,5 +46,18 @@ Jello.config(
   function($stateProvider, $urlRouterProvider){
     $urlRouterProvider.otherwise('')
 
-    // $stateProvider.state()
+    $stateProvider
+      .state('board', {
+        url: '/board/:id',
+        templateUrl: '/templates/board/show.html',
+        controller: 'BoardShowCtrl'
+        views: {
+          'list-index' {
+            templateUrl: '/templates/list/index.html'
+          },
+          'activity-feed' {
+            templateUrl: '/templates/boards/activity-feed.html'
+          }
+        }
+      })
   }])
