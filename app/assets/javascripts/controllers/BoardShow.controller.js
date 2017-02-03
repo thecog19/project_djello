@@ -1,7 +1,8 @@
-Jello.('BoardShowCtrl', ['$scope', '$stateParams', '$state', 'boardService',
-  function($scope, $stateParams, $state) {
-    if (!$stateParams.id) {
-      $scope.board = boards
-      $stateParams.id = $scope.boards[0]
-    }
+Jello.controller('BoardShowCtrl', ['$scope', '$stateParams', '$state', 'boards',
+  function($scope, $stateParams, $state, boards) {
+    // $scope.board = boards
+    // if (!$stateParams.id) {
+    //   $stateParams.id = $scope.boards[0]
+    // }
+    // console.log($stateParams, boards)
   }])

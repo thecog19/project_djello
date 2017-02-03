@@ -44,12 +44,11 @@ Jello.config(
   ['$stateProvider', '$urlRouterProvider',
   
   function($stateProvider, $urlRouterProvider){
-    $urlRouterProvider.otherwise('')
+    $urlRouterProvider.otherwise('/')
 
     $stateProvider
       .state('board', {
         url: '/board/:id',
-        templateUrl: '/templates/board/show.html',
         controller: 'BoardShowCtrl',
         resolve: {
           "boards": ["boardService", function(boardService){
@@ -57,10 +56,13 @@ Jello.config(
           }]
         },
         views: {
-          'list-index' {
-            templateUrl: '/templates/list/index.html'
+          '' : {
+            templateUrl: '/templates/boards/show.html',
           },
-          'activity-feed' {
+          'list-index' : {
+            templateUrl: '/templates/lists/index.html',
+          },
+          'activity-feed' : {
             templateUrl: '/templates/boards/activity-feed.html'
           }
         }

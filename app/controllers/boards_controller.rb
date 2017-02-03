@@ -1,6 +1,6 @@
 class BoardsController < ApplicationController
   def index
-    @board = current_user.boards
-    render json: @board
+    @boards = current_user.shared_boards
+    render json: @boards
   end
 end
