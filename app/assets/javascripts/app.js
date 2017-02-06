@@ -43,7 +43,7 @@ Jello.config(
   ['$stateProvider', '$urlRouterProvider',
   
   function($stateProvider, $urlRouterProvider){
-    $urlRouterProvider.otherwise('/board/new')
+    $urlRouterProvider.otherwise('/')
 
 
     $stateProvider
@@ -57,15 +57,18 @@ Jello.config(
           }
         }
         })
+      .state('delete',{
+        url: "boards/delete/:id",
+        template: "Please wait, destroying board",
+        controller: "BoardDestroyCtrl"
+      })
       .state('boards', {
         url: '/boards/show/:id',
         resolve: {
           "boards": ["boardService", function(boardService){
-            console.log("running")
             return boardService.all() 
           }],
           "board": ["boardService", "$stateParams", function(boardService, $stateParams) {
-            console.log("from the law")
             return boardService.find($stateParams.id)
           }]
         },

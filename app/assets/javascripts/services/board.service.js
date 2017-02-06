@@ -26,9 +26,17 @@ Jello.factory('boardService', ['Restangular',
         })
     }
 
+    var destroy = function(id){
+      return Restangular.one('boards', id).remove()
+        .then(function(board) {
+          return board;
+        })
+    }
+
     return {
       all: all,
       find: find,
-      create: create
+      create: create,
+      destroy: destroy
     }
   }])

@@ -15,6 +15,18 @@ class BoardsController < ApplicationController
     end
   end
 
+  def destroy 
+    @board = Board.find(params[:id])
+    if @board.destroy
+      respond_to do |format|
+        format.json {@board}
+      end
+    else 
+      render json: "No board found", status: 404
+    end
+
+  end
+
   def create
     @board = current_user.owned_boards.build(board_params)
     if @board.save

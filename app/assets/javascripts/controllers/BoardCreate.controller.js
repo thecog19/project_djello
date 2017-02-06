@@ -6,6 +6,5 @@ Jello.controller('BoardCreateCtrl', ['$scope', "boardService", "$stateParams", '
           $state.go('boards', { id: board.id })
         })
     }
-    console.log($stateParams)
     $scope.lastId = $stateParams.lastId
   }]);
