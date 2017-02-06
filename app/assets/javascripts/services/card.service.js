@@ -1,4 +1,4 @@
-ello.factory('cardService', ['Restangular', 
+Jello.factory('cardService', ['Restangular', 
   function(Restangular) {
     
     var _cards;

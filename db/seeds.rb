@@ -55,4 +55,10 @@ List.all.each do |list|
   end
 end
 
+Card.all.each do |card|
+  card.actions.create(
+
+    )
+end
+
 puts "All done!"

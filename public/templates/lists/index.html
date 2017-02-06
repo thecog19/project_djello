@@ -7,8 +7,12 @@
     <div class="well" ng-repeat="card in list.cards">
       <p>{{ card.title }}</p>
       <p>{{ card.description }}</p>
+      <button class="btn btn-danger btn-sm">Complete Task</button>
+      <button class="btn btn-success btn-sm">Edit Task</button>
     </div>
   </div>
   <div class="panel-footer">
+    <button class="btn btn-primary">Create New Card</button>
   </div>
 </div>
+<button class="btn btn-primary">Create New List</button>
