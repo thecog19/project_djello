@@ -12,17 +12,28 @@ class ListsController < ApplicationController
   end
 
   def create
-    @list = current_user.owned_lists.build(list_params)
+    @list = List.new(list_params)
+    @list.user_id = current_user.id
     if @list.save
-      current_user.shared_lists << @list
       render json: @list
     else
       render json: @list.errors.full_messages, status: 422
     end
   end
 
-  def edit
+  def update
+    @list = List.find(params[:id])
 
+    respond_to do |format|
+      if @list.update(list_params)
+        format.json { render json: @list, status: 201 }
+      else
+        format.json { render json: { errors: @list.errors.full_messages, status: :unprocessable_entity } }
+      end
+    end
+  end
 
+  def list_params
+    params.require(:list).permit(:title, :description, :board_id)
   end
 end

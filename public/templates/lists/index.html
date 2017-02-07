@@ -1,18 +1,42 @@
-<div class="list panel panel-default" ng-repeat="list in currentBoard.lists">
+<div class="list panel panel-default" ng-repeat="list in currentBoard.lists" ng-mouseover="hoverIn()" ng-mouseleave="hoverOut()"> 
   <div class="panel-heading">
-    <h5>{{ list.title }}</h5>
-    <p>{{ list.description }}</p>
-  </div>
-  <div class="panel-body">
-    <div class="well" ng-repeat="card in list.cards">
-      <p>{{ card.title }}</p>
-      <p>{{ card.description }}</p>
-      <button class="btn btn-danger btn-sm">Complete Task</button>
-      <button class="btn btn-success btn-sm">Edit Task</button>
+    <div ng-click="toggleHide()" ng-hide="isHidden()" data-id="{{list.id}}">
+      <h5 >{{ list.title }}</h5>
+      <p>{{ list.description }}</p>
     </div>
   </div>
-  <div class="panel-footer">
-    <button class="btn btn-primary">Create New Card</button>
+  <div class="panel-body" >
+    <div class="well" ng-repeat="card in list.cards" ng-mouseover="hoverIn(card.id)" ng-mouseleave="hoverOut(card.id)" >
+
+    <div class="modal fade" id="myModal{{card.id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title" id="myModalLabel{{card.id}}">{{ card.title }}</h4>
+          </div>
+          <div class="modal-body">
+            <p id="myModalBody{{card.id}}">{{ card.description }}</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" id="saveEdit{{card.id}}" class="btn btn-success hidden"  ng-click="saveEdit(card.id)">Save Changes</button>
+            <button type="button" class="btn btn-default" ng-click="clear(card.id)">Close</button>
+            <button class="btn btn-success btn-sm" id="edit{{card.id}}" ng-click="activateEdit(card.id, card.title, card.description)">Edit Task</button>
+          </div>
+        </div>
+      </div>
+    </div>  
+
+      
+
+      <p ng-click="triggerModal(card.id)">{{ card.title }}</p>
+      <div ng-hide="hoveringCard(id)">  
+        <button class="btn btn-danger btn-sm" ng-click="destroyCard(card.id)">Complete Task</button>
+      </div>
+    </div>
+  </div>
+  <div class="panel-footer" ng-show="hovering">
+    <button class="btn btn-primary" ng-click="createCard(list.id)">Create New Card</button>
+    <button class="btn btn-danger" ng-click="destroyList(list.id)">Delete List</button>
   </div>
 </div>
-<button class="btn btn-primary">Create New List</button>
+<button class="btn btn-primary" ng-click="createList()">Create New List</button>

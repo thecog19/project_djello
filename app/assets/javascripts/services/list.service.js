@@ -1,7 +1,7 @@
 Jello.factory('listService', ['Restangular', 
   function(Restangular) {
     
-    var _lists;
+    var _lists = [];
 
     var find = function(id) {
       return Restangular.one('lists', id).get()
@@ -10,11 +10,14 @@ Jello.factory('listService', ['Restangular',
         })
     }
 
-    var create = function(title) {
-      return Restangular.all('lists').post({board: { title: title}})
-        .then(function(board) {
-          _lists.unshift(list);
-          return list
+    var create = function(title, board_id) {
+      return Restangular.all('lists').post({list: { title: title, board_id: board_id}})
+        .then(function(list) {
+          if(_lists){
+          _lists.push(list);
+          return list 
+          }
+
         })
     }
 
@@ -25,9 +28,21 @@ Jello.factory('listService', ['Restangular',
         })
     }
 
+    var update = function(title, body){
+      return Restangular.all('lists').put({list: { title: title, body: body}})
+        .then(function(list) {
+          if(_lists){
+          _lists.push(list);
+          return list 
+          }
+
+        })
+    }
+
     return {
       find: find,
       create: create,
-      destroy: destroy
+      destroy: destroy,
+      update: update
     }
   }])

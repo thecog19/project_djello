@@ -1,7 +1,7 @@
 class CardsController < ApplicationController
 
   def destroy 
-    @card = card.find(params[:id])
+    @card = Card.find(params[:id])
     if @card.destroy
       respond_to do |format|
         format.json {@card}
@@ -13,18 +13,29 @@ class CardsController < ApplicationController
   end
 
   def create
-    @card = current_user.owned_cards.build(card_params)
+    @card = current_user.cards_used.build(card_params)
+    @card.user_id = current_user.id
     if @card.save
-      current_user.shared_cards << @card
       render json: @card
     else
       render json: @card.errors.full_messages, status: 422
     end
   end
 
-  def edit
+  def update
+    @card = Card.find(params[:id])
 
-
+    respond_to do |format|
+      if @card.update(card_params)
+        format.json { render json: @card, status: 201 }
+      else
+        format.json { render json: { errors: @card.errors.full_messages, status: :unprocessable_entity } }
+      end
+    end
+  end
+  private 
+  def card_params
+    params.require(:card).permit(:title, :description, :list_id)
   end
 end
 
