@@ -26,7 +26,7 @@ Jello.factory('cardService', ['Restangular',
     }
 
     var update = function(id, title, body){
-      return Restangular.one('cards', id).patch({card: { title: title, body: body}})
+      return Restangular.one('cards', id).patch({card: { title: title, description: body}})
         .then(function(card) {
           return card 
           })

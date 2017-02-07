@@ -25,6 +25,7 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-lodash'
   gem 'rails-assets-restangular'
   gem "rails-assets-angular-devise"
+  gem 'rails-assets-marceljuenemann--angular-drag-and-drop-lists'
 end
 
 group :development, :test do

@@ -32,10 +32,18 @@ Jello.factory('boardService', ['Restangular',
         })
     }
 
+    var update = function(id, title, body){
+      return Restangular.one('boards', id).patch({board: { title: title, description: body}})
+        .then(function(board) {
+          return board 
+          })
+    }
+
     return {
       all: all,
       find: find,
       create: create,
-      destroy: destroy
+      destroy: destroy,
+      update: update
     }
   }])

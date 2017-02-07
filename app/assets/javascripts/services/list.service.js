@@ -28,15 +28,11 @@ Jello.factory('listService', ['Restangular',
         })
     }
 
-    var update = function(title, body){
-      return Restangular.all('lists').put({list: { title: title, body: body}})
+     var update = function(id, title, body){
+      return Restangular.one('lists', id).patch({list: { title: title, description: body}})
         .then(function(list) {
-          if(_lists){
-          _lists.push(list);
           return list 
-          }
-
-        })
+          })
     }
 
     return {

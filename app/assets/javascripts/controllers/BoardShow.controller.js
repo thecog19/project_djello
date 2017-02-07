@@ -1,6 +1,6 @@
 
-Jello.controller('BoardShowCtrl', ['$scope', '$stateParams', '$state', 'boards', "board", "cardService", "$rootScope", "listService",
-  function($scope, $stateParams, $state, boards, board, cardService, $rootScope, listService) {
+Jello.controller('BoardShowCtrl', ['$scope', '$stateParams', '$state', 'boards', "board", "cardService", "$rootScope", "listService", "boardService",
+  function($scope, $stateParams, $state, boards, board, cardService, $rootScope, listService, boardService) {
     $scope.boards = boards
     $scope.currentBoard = board
     $scope.boardId = board.id
@@ -78,25 +78,52 @@ Jello.controller('BoardShowCtrl', ['$scope', '$stateParams', '$state', 'boards',
     }
 
     $scope.activateEdit = function(id, title, body){
-      console.log("id is:" + id)
+
       $("#myModalLabel" + id).hide()
       $("#myModalBody" + id).hide()
       $("#edit" + id).hide()
       $scope.title = title
       $scope.body = body
 
-      $(".modal-header").html("<label>Title:</label><input type='text' ng-model='title' value='"+title+"'>")
-      $(".modal-body").html("<label>Body:</label><input type='text' ng-model='body' value='"+body+"'>")
+
+
+      $("#mHeader" + id).removeClass("hidden")
+      $("#mFooter" + id).removeClass("hidden")
       $("#saveEdit" + id).removeClass("hidden")
     }
 
-    $scope.saveEdit = function(id){
-      //need to also update it to hide the fill in fields 
-      cardService.update(id, $scope.title, $scope.body).then(function(object){
+    $scope.saveEdit = function(id, title, body){
+      console.log($scope.title)
+      cardService.update(id, title, body).then(function(object){
         var id = object.id
-        $("#myModalLabel" + id).show().text($scope.title)
-        $("#myModalBody" + id).show().text($scope.body)
+        $("#myModalLabel" + id).show().text(title)
+        $("#myModalBody" + id).show().text(body)
         $("#edit" + id).show()
+        $("#mFooter" + id).addClass("hidden")
+        $("#mHeader" + id).addClass("hidden")
+        $("#saveEdit" + id).addClass("hidden")
       })
+    }
+
+    $scope.listEdit = function(id){
+      $("#listForm" + id).removeClass("hidden")
+      $("#listInfo" + id).addClass("hidden")
+    }
+
+    $scope.listChange = function(id, title, body){
+       listService.update(id, title, body)
+      $("#listForm" + id).addClass("hidden")
+      $("#listInfo" + id).removeClass("hidden")
+    }
+
+    $scope.boardEdit = function(){
+      $("#boardForm").removeClass("hidden")
+      $("#boardInfo").addClass("hidden")
+    }
+
+    $scope.boardChange = function(id, title, body){
+       boardService.update(id, title, body)
+      $("#boardForm").addClass("hidden")
+      $("#boardInfo").removeClass("hidden")
     }
   }])

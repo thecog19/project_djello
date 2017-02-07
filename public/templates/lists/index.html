@@ -1,8 +1,19 @@
 <div class="list panel panel-default" ng-repeat="list in currentBoard.lists" ng-mouseover="hoverIn()" ng-mouseleave="hoverOut()"> 
   <div class="panel-heading">
-    <div ng-click="toggleHide()" ng-hide="isHidden()" data-id="{{list.id}}">
-      <h5 >{{ list.title }}</h5>
-      <p>{{ list.description }}</p>
+    <div ng-click="toggleHide()" ng-hide="isHidden()" id="list{{list.id}}">
+      <div id="listInfo{{list.id}}">
+        <h5 ng-click="listEdit(list.id)">{{ list.title }}</h5>
+        <p ng-click="listEdit(list.id)">{{ list.description }}</p>
+      </div>
+
+      <div id="listForm{{list.id}}" class="hidden">
+        <label>Title:</label>
+        <input type='text' ng-model='list.title'>
+        <br>
+        <label>Body:</label>
+        <input type='text' ng-model='list.description'>
+        <button ng-click="listChange(list.id, list.title, list.description)" class="btn btn-primary">Save Changes </button>
+      </div>
     </div>
   </div>
   <div class="panel-body" >
@@ -13,12 +24,19 @@
         <div class="modal-content">
           <div class="modal-header">
             <h4 class="modal-title" id="myModalLabel{{card.id}}">{{ card.title }}</h4>
+            <div id='mHeader{{card.id}}' class="hidden">
+              <label>Title:</label>
+              <input type='text' ng-model='card.title' >
+            </div>
           </div>
           <div class="modal-body">
             <p id="myModalBody{{card.id}}">{{ card.description }}</p>
-          </div>
+            <div id='mFooter{{card.id}}' class="hidden">
+              <label>Body:</label>
+              <input type='text' ng-model='card.description'></div>
+            </div>
           <div class="modal-footer">
-            <button type="button" id="saveEdit{{card.id}}" class="btn btn-success hidden"  ng-click="saveEdit(card.id)">Save Changes</button>
+            <button type="button" id="saveEdit{{card.id}}" class="btn btn-success hidden"  ng-click="saveEdit(card.id, card.title, card.description)">Save Changes</button>
             <button type="button" class="btn btn-default" ng-click="clear(card.id)">Close</button>
             <button class="btn btn-success btn-sm" id="edit{{card.id}}" ng-click="activateEdit(card.id, card.title, card.description)">Edit Task</button>
           </div>
@@ -26,7 +44,6 @@
       </div>
     </div>  
 
-      
 
       <p ng-click="triggerModal(card.id)">{{ card.title }}</p>
       <div ng-hide="hoveringCard(id)">  

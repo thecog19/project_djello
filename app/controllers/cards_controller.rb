@@ -24,7 +24,6 @@ class CardsController < ApplicationController
 
   def update
     @card = Card.find(params[:id])
-
     respond_to do |format|
       if @card.update(card_params)
         format.json { render json: @card, status: 201 }

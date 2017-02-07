@@ -178,6 +178,7 @@ GEM
       rails-assets-jquery (>= 1.9.1, < 4)
     rails-assets-jquery (3.1.1)
     rails-assets-lodash (4.17.4)
+    rails-assets-marceljuenemann--angular-drag-and-drop-lists (2.1.0)
     rails-assets-restangular (1.6.1)
       rails-assets-angular (~> 1.0)
       rails-assets-lodash (~> 4.17.0)
@@ -287,6 +288,7 @@ DEPENDENCIES
   rails-assets-angular-devise!
   rails-assets-bootstrap!
   rails-assets-lodash!
+  rails-assets-marceljuenemann--angular-drag-and-drop-lists!
   rails-assets-restangular!
   rails-assets-ui-router!
   rspec-rails
